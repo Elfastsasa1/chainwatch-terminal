@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import { fetchSnapshot, formatRel } from './lib/api'
 import RegimePanel from './components/RegimePanel'
+import EarlyWarningPanel from './components/EarlyWarningPanel'
 import MicrostructurePanel from './components/MicrostructurePanel'
 import MarketPanel from './components/MarketPanel'
 import StablesPanel from './components/StablesPanel'
@@ -90,15 +91,20 @@ export default function App() {
               <MarketPanel market={data.market} />
             </div>
 
-            {/* Mid row: microstructure + stables */}
+            {/* Mid row: early-warning + microstructure */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <EarlyWarningPanel earlyWarning={data.early_warning} />
               <MicrostructurePanel microstructure={data.microstructure} />
-              <StablesPanel stables={data.stables} />
             </div>
 
-            {/* Bottom row: dex + news */}
+            {/* Stables row */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <StablesPanel stables={data.stables} />
               <DexPanel dex={data.dex} />
+            </div>
+
+            {/* Bottom row: news full-width */}
+            <div className="grid grid-cols-1 gap-4">
               <NewsPanel news={data.news} />
             </div>
           </>
